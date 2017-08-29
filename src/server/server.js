@@ -6,7 +6,7 @@ import {jwtSecret} from './secrets';
 
 const numCpus = os.cpus().length;
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3333;
 
 export const options = {
   authKey: jwtSecret,
