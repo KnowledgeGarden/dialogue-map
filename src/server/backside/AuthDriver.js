@@ -15,13 +15,14 @@ export default class AuthDriver extends BacksideDriver {
     if (typeof body.rMsg !== 'string') throw new ResponseMessageError(body.rMsg);
     if (!body.cargo) return [body.rToken, {}];
     const {uEmail, uName, uFullName, uRole} = body.cargo;
+    console.log("AAA "+JSON.stringify(body.cargo));
     return [
       body.rToken,
       {
         email: uEmail,
         handle: uName,
         name: uFullName,
-        role: (uRole || '').split(',').map(str => str.trim()).filter(str => str)
+        role: (uRole[0] || '').split(',').map(str => str.trim()).filter(str => str)
       }
     ];
   }
