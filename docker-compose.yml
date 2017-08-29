@@ -1,0 +1,40 @@
+version: '2'
+services:
+  web:
+    image: wenzowski/dialogue-map
+    restart: always
+    mem_limit: 576m
+    environment:
+      VIRTUAL_HOST: dialogue-map.wenzowski.com
+      LETSENCRYPT_HOST: dialogue-map.wenzowski.com
+      LETSENCRYPT_EMAIL: alec@wenzowski.com
+      BACKSIDE_URL: http://backside:8080
+      RETHINKDB_URL: rethinkdb://rethinkdb:28015
+    depends_on:
+      - backside
+      - rethinkdb
+    links:
+      - backside
+      - rethinkdb
+  backside:
+    image: wenzowski/backside-servlet-ks:0.6.1
+    mem_limit: 448m
+    restart: always
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch:es
+    volumes:
+      - /var/local/dialogue-map/backside:/app/data/backside
+  rethinkdb:
+    image: rethinkdb:2.3.2
+    mem_limit: 192m
+    restart: always
+    volumes:
+      - /var/local/dialogue-map:/data
+  elasticsearch:
+    image: elasticsearch:2.3.3
+    mem_limit: 704m
+    restart: always
+    volumes:
+      - /var/local/dialogue-map:/usr/share/elasticsearch/data

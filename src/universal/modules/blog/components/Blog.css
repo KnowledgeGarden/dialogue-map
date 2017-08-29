@@ -1,0 +1,22 @@
+@value textLight from 'universal/styles/colors.css';
+@value maxWidth from 'universal/styles/layout.css';
+
+.blog {
+  max-width: maxWidth;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.empty {
+  color: textLight;
+  margin: 64px auto;
+  padding: 16px;
+  text-align: center;
+  max-width: maxWidth;
+}
+
+.icon {
+  fill: textLight !important;
+  height: 64px !important;
+  width: 64px !important;
+}

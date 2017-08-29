@@ -1,0 +1,9 @@
+approve_by_comment: true
+approve_regex: '^(Approved|:shipit:|LGTM)'
+reject_regex: '^(Rejected|Closing)'
+reset_on_push: false
+reviewers:
+  members:
+  - wenzowski
+  name: default
+  required: 1

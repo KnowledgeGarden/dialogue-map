@@ -1,0 +1,32 @@
+.paper {
+  padding: 0 8px;
+  margin: 28px auto;
+  width: 570px;
+}
+
+.responseType {
+  display: inline-block !important;
+  position: relative !important;
+  top: 2px;
+}
+
+.responseType div {
+  width: initial !important;
+}
+
+.readable input:disabled, .readable textarea:disabled {
+  color: #222 !important;
+}
+
+.details {
+  margin-top: 38px;
+  width: 100%;
+  min-height: 72px;
+  display: inline-block;
+}
+
+.details::before {
+  color: rgba(0,0,0,0.3);
+  position: relative;
+  top: 1em;
+}

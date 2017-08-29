@@ -1,0 +1,36 @@
+@value maxWidth from 'universal/styles/layout.css';
+
+.nav a {
+  text-decoration: none;
+}
+
+.title h1 {
+  transition: margin-left 0.08s ease-out;
+  max-width: maxWidth;
+  margin-right: auto !important;
+}
+
+.title h1 + div{
+  margin-left: 0 !important;
+}
+
+.action {
+  position: fixed;
+  top: 132px;
+  right: 24px;
+  z-index: 1150;
+}
+
+.userIcon {
+  display: block;
+  margin-top: 4px;
+}
+
+.userIcon > div {
+  background-size: cover !important;
+}
+
+.userDropDown {
+  margin-bottom: 8px;
+  fill: white !important;
+}

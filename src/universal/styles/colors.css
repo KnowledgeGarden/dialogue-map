@@ -1,0 +1,17 @@
+@value primaryDark: #0288D1;
+@value primary: #03A9F4;
+@value primaryLight: #B3E5FC;
+@value secondary: #FF4081;
+@value textInverse: #FFFFFF;
+@value text: #212121;
+@value textLight: #727272;
+@value divider: #B6B6B6;
+
+
+.brandColor {
+  color: primary;
+}
+
+.backgroundColor {
+  background-color: secondary;
+}

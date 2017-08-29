@@ -1,0 +1,41 @@
+machine:
+  pre:
+    - curl -sSL https://s3.amazonaws.com/circle-downloads/install-circleci-docker.sh | bash -s -- 1.10.0
+    - sudo curl -L -o /usr/local/bin/docker-compose https://github.com/docker/compose/releases/download/1.7.1/docker-compose-`uname -s`-`uname -m`
+  services:
+    - docker
+
+dependencies:
+  cache_directories:
+    - "~/docker"
+  override:
+    - if [[ -e ~/docker/dialogue-map-development.tar ]]; then docker load --input ~/docker/dialogue-map-development.tar; fi
+    - if [[ -e ~/docker/dialogue-map-backside-servlet-ks.tar ]]; then docker load --input ~/docker/dialogue-map-backside-servlet-ks.tar; fi
+    - if [[ -e ~/docker/dialogue-map-rethinkdb.tar ]]; then docker load --input ~/docker/dialogue-map-rethinkdb.tar; fi
+    - if [[ -e ~/docker/dialogue-map-elasticsearch.tar ]]; then docker load --input ~/docker/dialogue-map-elasticsearch.tar; fi
+    - docker-compose -f docker-compose.yml -f docker-compose.development.yml build
+    - docker-compose -f docker-compose.yml -f docker-compose.development.yml run web npm install
+    - docker-compose -f docker-compose.yml -f docker-compose.development.yml up -d
+    - mkdir -p ~/docker
+    - docker save wenzowski/dialogue-map-development > ~/docker/dialogue-map-development.tar
+    - docker save wenzowski/backside-servlet-ks > ~/docker/backside-servlet-ks.tar
+    - docker save rethinkdb > ~/docker/dialogue-map-rethinkdb.tar
+    - docker save elasticsearch > ~/docker/dialogue-map-elasticsearch.tar
+
+test:
+  pre:
+    - if [[ $CIRCLE_TAG ]]; then echo $CIRCLE_SHA1 > .git/HEAD; fi
+  override:
+    - docker-compose -f docker-compose.yml -f docker-compose.development.yml run web npm run ci
+
+deployment:
+  release:
+    tag: /^\d+\.\d+\.\d+$/
+    owner: wenzowski
+    commands:
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker pull wenzowski/dialogue-map
+      - docker-compose -f docker-compose.yml -f docker-compose.development.yml run web npm run build
+      - docker build -t wenzowski/dialogue-map:$CIRCLE_TAG -t wenzowski/dialogue-map .
+      - docker push wenzowski/dialogue-map:$CIRCLE_TAG
+      - docker push wenzowski/dialogue-map:latest

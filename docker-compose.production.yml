@@ -1,0 +1,35 @@
+version: '2'
+services:
+  nginx:
+    image: jwilder/nginx-proxy
+    restart: always
+    mem_limit: 32m
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /var/local/dialogue-map/nginx/certs:/etc/nginx/certs:ro
+      - /var/local/dialogue-map/nginx/vhost.d:/etc/nginx/vhost.d
+      - /var/local/dialogue-map/nginx/html:/usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+  letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    restart: always
+    mem_limit: 32m
+    cpu_quota: 1000
+    volumes_from:
+      - nginx
+    volumes:
+      - /var/local/dialogue-map/nginx/certs:/etc/nginx/certs:rw
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  watchtower:
+    image: drud/watchtower
+    restart: always
+    mem_limit: 32m
+    environment:
+      REPO_EMAIL: ${DOCKER_EMAIL}
+      REPO_USER: ${DOCKER_USER}
+      REPO_PASS: ${DOCKER_PASS}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: dialoguemap_web_1 --debug

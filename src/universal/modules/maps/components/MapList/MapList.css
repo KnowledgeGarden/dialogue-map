@@ -1,0 +1,12 @@
+.paper {
+  margin: 0 auto;
+  width: 784px;
+  display: 'inline-block';
+}
+
+@media (max-width: 784px) {
+  .paper {
+    min-width: 100%;
+    width: 100%;
+  }
+}

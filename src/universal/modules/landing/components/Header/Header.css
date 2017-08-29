@@ -1,0 +1,26 @@
+@value primary, secondary from 'universal/styles/colors.css';
+
+.banner {
+  height: 280px;
+  text-align: center;
+}
+
+.bannerTitle {
+  margin: 0;
+  padding: 10px;
+  padding-top: 50px;
+  font-weight: 500;
+  font-size: 4em;
+  line-height: 1em;
+}
+
+.bannerDesc {
+  padding: 0;
+  font-size: 1.25em;
+  font-weight: 300;
+  margin: 0;
+}
+
+.tryButton {
+  padding-top: 24px;
+}

@@ -1,0 +1,28 @@
+@value maxWidth from 'universal/styles/layout.css';
+@value secondary from 'universal/styles/colors.css';
+
+.post {
+  max-width: maxWidth;
+  margin: 0 auto;
+  z-index: 1150;
+  position: absolute;
+  top: 88px;
+  left: 0;
+  right: 0;
+  padding: 0 16px;
+}
+
+@media (max-width: 960px) {
+  .post {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+}
+
+.full {
+  margin: -1px -16px 0 !important;
+}
+
+.postError {
+  color: secondary;
+}

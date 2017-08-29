@@ -1,0 +1,17 @@
+@value textInverse from "universal/styles/colors.css";
+@value height: 28px;
+
+.tag {
+  height: height !important;
+  line-height: height !important;
+  min-width: initial !important;
+  border-radius: height !important;
+  margin: 0 4px 0 0 !important;
+  color: textInverse !important;
+}
+
+.tag span {
+  padding: 0 12px !important;
+  text-transform: none !important;
+  font-weight: 300 !important;
+}

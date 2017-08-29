@@ -1,0 +1,10 @@
+.git
+.DS_Store
+node_modules
+npm-debug.log
+rethinkdb_data
+stats.json
+coverage
+.nyc_output
+.floo
+.flooignore

@@ -1,0 +1,13 @@
+FROM node:6.2.0
+ENV NODE_ENV development
+
+WORKDIR /app
+
+ADD . .
+
+VOLUME /app/build
+VOLUME /app/node_modules
+VOLUME /app/.git
+
+EXPOSE 3000
+CMD ["node", "./src/server/server.babel.js"]

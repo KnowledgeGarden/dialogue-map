@@ -1,0 +1,9 @@
+.reply {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.reply button {
+  width: auto !important;
+}

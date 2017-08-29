@@ -1,0 +1,16 @@
+/* child node container */
+.node + div{
+  padding: 0 !important;
+}
+
+/* node title */
+.node div div div:nth-child(3) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* inner div */
+.hovered > div > div {
+  padding-right: 112px !important;
+}

@@ -1,0 +1,172 @@
+{
+  "name": "dialogue-map",
+  "version": "0.1.5",
+  "engines": {
+    "node": "6.2.0"
+  },
+  "description": "An issue-based information system for structured conversation",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wenzowski/dialogue-map.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wenzowski/dialogue-map/issues"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=development node ./src/server/server.babel.js",
+    "prod": "NODE_ENV=production node ./src/server/server.babel.js",
+    "build": "rimraf build/* && concurrently \"npm run build:client\" \"npm run build:server\"",
+    "bs": "rimraf build/* && concurrently \"npm run build:client\" \"npm run build:server\" \"npm run prod\"",
+    "quickstart": "rimraf build/* && concurrently \"npm run db:create\" \"npm run build:client\" \"npm run build:server\" \"npm run prod\"",
+    "build:client": "NODE_ENV=production webpack --progress --config ./webpack/prod.babel.js",
+    "build:server": "NODE_ENV=production webpack --progress --config ./webpack/server.babel.js",
+    "db:create": "node ./src/server/database/setupDB.babel.js",
+    "db:migrate": "node ./src/server/database/setupDB.babel.js",
+    "db:reset": "node ./src/server/database/setupDB.babel.js true",
+    "pretest": "NODE_ENV=testing npm run db:reset",
+    "test": "NODE_ENV=testing nyc ava",
+    "posttest": "npm run lint",
+    "report": "mkdirp ./coverage && nyc report --reporter=text-lcov >> coverage/lcov.info",
+    "watch": "NODE_ENV=testing ava --watch",
+    "ci": "NODE_ENV=testing npm run test && npm run coverage",
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "lint": "xo --fix 'src/**/*.js' 'tests/*.js' 'webpack/*.js' | tee",
+    "profile": "NODE_ENV=production webpack --config ./webpack/prod.babel.js --profile --json > stats.json"
+  },
+  "author": "Alec Wenzowski <alec@wenzowski.com>",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "ava": "0.15.1",
+    "ava-codemods": "^0.2.1",
+    "babel-cli": "6.9.0",
+    "babel-core": "6.9.0",
+    "babel-eslint": "6.0.4",
+    "babel-loader": "6.2.4",
+    "babel-plugin-react-transform": "2.0.2",
+    "chalk": "1.1.3",
+    "concurrently": "2.1.0",
+    "coveralls": "2.11.9",
+    "css-loader": "0.23.1",
+    "diff": "2.2.2",
+    "eslint": "2.11.0",
+    "eslint-config-xo-meatier": "0.2.2",
+    "eslint-plugin-babel": "3.2.0",
+    "eslint-plugin-react": "5.1.1",
+    "fake-style-loader": "1.0.1",
+    "file-loader": "0.8.5",
+    "json-loader": "0.5.4",
+    "nock": "8.0.0",
+    "npm-check-updates": "^2.5.8",
+    "null-loader": "0.1.1",
+    "nyc": "^6.1.1",
+    "postcss-loader": "0.9.1",
+    "raw-loader": "0.5.1",
+    "react-addons-test-utils": "15.1.0",
+    "react-transform-catch-errors": "1.0.2",
+    "react-transform-hmr": "1.0.4",
+    "redbox-react": "1.2.6",
+    "redux-devtools": "3.3.1",
+    "redux-devtools-dock-monitor": "1.1.1",
+    "redux-devtools-log-monitor": "1.0.11",
+    "rimraf": "2.5.2",
+    "sinon": "1.17.4",
+    "stats-webpack-plugin": "0.3.1",
+    "style-loader": "0.13.1",
+    "url-loader": "0.5.7",
+    "webpack-dev-middleware": "1.6.1",
+    "webpack-hot-middleware": "2.10.0",
+    "xo": "0.15.1"
+  },
+  "dependencies": {
+    "alloyeditor": "1.2.2",
+    "assets-webpack-plugin": "3.4.0",
+    "babel-plugin-add-module-exports": "0.2.1",
+    "babel-plugin-transform-decorators-legacy": "1.3.4",
+    "babel-polyfill": "6.9.0",
+    "babel-preset-es2015": "6.9.0",
+    "babel-preset-react": "6.5.0",
+    "babel-preset-stage-0": "6.5.0",
+    "babel-register": "6.9.0",
+    "babel-runtime": "6.9.0",
+    "bcrypt": "0.8.6",
+    "body-parser": "1.15.1",
+    "classnames": "^2.2.3",
+    "compression": "1.6.2",
+    "cors": "2.7.1",
+    "deep-equal": "1.0.1",
+    "es6-promisify": "4.1.0",
+    "express": "4.13.4",
+    "express-jwt": "3.4.0",
+    "extract-text-webpack-plugin": "1.0.1",
+    "graphiql": "0.7.1",
+    "graphql": "0.6.0",
+    "immutable": "3.8.1",
+    "isomorphic-fetch": "2.2.1",
+    "joi": "8.1.1",
+    "jsonwebtoken": "7.0.0",
+    "jwt-decode": "2.0.1",
+    "material-ui": "0.15.0",
+    "morgan": "1.7.0",
+    "node-uuid": "1.4.7",
+    "parse-rethinkdb-url": "0.0.1",
+    "piping": "1.0.0-rc.1",
+    "postcss-modules-values": "1.1.3",
+    "query-string": "4.1.0",
+    "react": "15.1.0",
+    "react-dom": "15.1.0",
+    "react-dom-stream": "0.5.1",
+    "react-redux": "4.4.5",
+    "react-router": "2.4.1",
+    "react-tap-event-plugin": "1.0.0",
+    "redux": "3.5.2",
+    "redux-form": "5.2.4",
+    "redux-immutablejs": "0.0.8",
+    "redux-logger": "2.6.1",
+    "redux-optimistic-ui": "0.4.0",
+    "redux-promise": "0.5.3",
+    "redux-simple-router": "2.0.4",
+    "redux-socket-cluster": "0.5.1",
+    "redux-thunk": "2.1.0",
+    "request": "2.72.0",
+    "rethinkdbdash": "2.3.6",
+    "socketcluster": "4.6.2",
+    "socketcluster-client": "4.3.17",
+    "url": "0.11.0",
+    "webpack": "2.1.0-beta.4"
+  },
+  "ava": {
+    "verbose": true,
+    "files": [
+      "**/__tests__/**/*.test.js"
+    ],
+    "require": [
+      "babel-core/register",
+      "babel-polyfill"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "es2015"
+    ],
+    "plugins": [
+      "transform-runtime"
+    ],
+    "ignore": [
+      "**/__tests__/**/*.js"
+    ],
+    "env": {
+      "testing": {
+        "sourceMaps": "inline"
+      }
+    }
+  },
+  "nyc": {
+    "exclude": [
+      "**/__tests__/**/*.js"
+    ]
+  },
+  "xo": {
+    "extends": "xo-meatier"
+  }
+}

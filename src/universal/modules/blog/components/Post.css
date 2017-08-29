@@ -1,0 +1,7 @@
+.post {
+  margin: 8px;
+}
+
+.post + .post {
+  margin-top: 0;
+}
