@@ -3,7 +3,8 @@ import BacksideDriver, {
 } from './BacksideDriver';
 import config from './backside.config';
 
-// Methods correspond with verbs in src/main/java/org/topicquests/backside/servlet/apps/tm/api/ITopicMapMicroformat.java
+// Methods correspond with verbs in
+//src/main/java/org/topicquests/backside/servlet/apps/tm/api/ITopicMapMicroformat.java
 export default class TopicMapDriver extends BacksideDriver {
   async fullTextSearch(query = {}) {
     return this.getCargo('/tm/', {verb: 'ftSrch', ...query});

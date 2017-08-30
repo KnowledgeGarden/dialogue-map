@@ -2,7 +2,8 @@ import BacksideDriver, {parseRangeQuery} from './BacksideDriver';
 import config from './backside.config';
 
 export default class UserDriver extends BacksideDriver {
-  // methods below correspond with verbs in src/main/java/org/topicquests/backside/servlet/apps/usr/api/IUserMicroformat.java
+  // methods below correspond with verbs in
+  //src/main/java/org/topicquests/backside/servlet/apps/usr/api/IUserMicroformat.java
 
   // TODO(wenzowski): try logging in before registering
   // TODO(wenzowski): ensure RemoveInvite is called

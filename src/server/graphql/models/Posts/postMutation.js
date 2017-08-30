@@ -14,6 +14,7 @@ export default {
       isLoggedIn(authToken);
       const {token, handle} = authToken;
       const {language, title, details, icon, isPrivate} = post;
+      console.log("BBB "+JSON.stringify(post));
       const newPost = await topicMap.addTopic({token, handle}, {
         language: (language || 'en'),
         label: title,

@@ -9,13 +9,21 @@ export default class AuthDriver extends BacksideDriver {
   // Methods correspond with verbs in src/main/java/org/topicquests/backside/servlet/apps/auth/api/IAuthMicroformat.java
 
   // TODO(wenzowski): is this the right way to use the 'Auth' verb?
+  // TODO (JP) temporary fix because backsideservlet is sending an array
+  //  need to do a mapping from that array to a comma-delimited string
+  //  in order to use the original code:
+  // (uRole || '').split(',').map(str => str.trim()).filter(str => str)
+  // TODO it's not even clear what this does
   async login(email, password, query = {}) {
     const endpoint = this.basicAuthEndpoint(email, password, query);
     const body = await this.get(endpoint);
     if (typeof body.rMsg !== 'string') throw new ResponseMessageError(body.rMsg);
     if (!body.cargo) return [body.rToken, {}];
     const {uEmail, uName, uFullName, uRole} = body.cargo;
-    console.log("AAA "+JSON.stringify(body.cargo));
+    //console.log("AAA "+JSON.stringify(body.cargo));
+    //AAA {"uGeoloc":"","uEmail":"testing@example.com",
+    //"uId":"bd4c69dc-ac6a-4567-a9f1-9692e26edefd","uHomepage":"",
+    //"uName":"user","uFullName":"test","uRole":["rur"],"uAvatar":""}
     return [
       body.rToken,
       {
